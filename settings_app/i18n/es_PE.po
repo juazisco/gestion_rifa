@@ -1,0 +1,17 @@
+#. module: auth_signup
+#: code:addons/auth_signup/controllers/main.py:80
+#, python-format
+msgid "An email has been sent with credentials to reset your password"
+msgstr "Se ha enviado un correo electrónico con credenciales para restablecer su contraseña"
+
+#. module: auth_signup
+#: code:addons/auth_signup/models/res_users.py:163
+#, python-format
+msgid "Reset password: invalid username or email"
+msgstr "Restablecimiento de contraseña: usuario o correo electrónico no válido"
+
+#. module: web
+#: code:addons/web/controllers/main.py:497
+#, python-format
+msgid "Wrong login/password"
+msgstr "Usuario ó clave incorrecta."

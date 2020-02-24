@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="layout" inherit_id="web.layout">
+        <xpath expr="//link[@rel='shortcut icon']" position="replace">
+            <link rel="icon" href="/web_favicon/favicon" />
+        </xpath>
+    </template>
+	
+   	   	 <template id="assets_login" inherit_id="web.assets_frontend">
+   	 	<xpath expr="." position="inside">
+   	 		<link rel="stylesheet" href="/settings_app/static/src/css/web_login_style.css"/>
+   	 	</xpath>
+    </template>
+    
+   	<template id="login_layout" inherit_id="web.login_layout" name="Login Layout Inherit">
+   		<xpath expr="//t[@t-set='body_classname']" position="after">
+			<t t-set="body_classname" t-value="''"/>
+   		</xpath>
+   		
+   		<xpath expr="//div[hasclass('container')]" position="attributes">
+   			<attribute name="class">body_login</attribute>
+   		</xpath>
+   		
+   		<xpath expr="//div[@t-attf-class='card border-0 mx-auto mt-5 bg-100 {{login_card_classes}} o_database_list']" position="before">
+   			<div id="background-wrapper" t-attf-style="background-image: url('/web/background_login');"></div>
+			   
+   		</xpath>
+   		
+   		<xpath expr="//div[@t-attf-class='card border-0 mx-auto mt-5 bg-100 {{login_card_classes}} o_database_list']" position="attributes">
+   			<attribute name="class">col-lg-3 col-md-4 col-sm-4 col-xs-11 o_database_list</attribute>
+   			<attribute name="style"></attribute>
+   		</xpath>
+   		
+   		<xpath expr="//div[hasclass('card-body')]/div/img[1]" position="replace">
+   			<div class="text-center" >
+             <img class='company_logo' t-attf-src="/web/binary/company_logo" />			
+			
+			 <p class="login_text_title1"  > 
+				<t t-esc="login_text_title1"/> 
+             </p>
+            <div class="login_text_title2"  > 
+				<t t-esc="login_text_title2"/> 
+             </div>
+            
+            </div>
+   		</xpath>
+
+		<xpath expr="//div[hasclass('card-body')]/div[2]" position="replace">
+			<div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+				<a t-att-href="url_text_footer and '%s%s' % ('http://' if '://' not in url_text_footer else '',url_text_footer)" target="_blank"><t t-esc="default_system_name"/></a>
+				<a t-att-href="url_text_footer and '%s%s' % ('http://' if '://' not in url_text_footer else '',url_text_footer)" target="_blank"><t t-esc="default_system_version"/></a>
+			</div>
+		</xpath>
+   	</template>
+   	
+   	<template id="auth_login_fields" inherit_id="auth_signup.fields" name="Login Inherit">
+		<xpath expr="//label[@for='login']" position="replace">
+			<label for="login">Tu usuario</label>
+		</xpath>
+		<xpath expr="//label[@for='name']" position="replace">
+			<label for="name">Tu nombre</label>
+		</xpath>
+		<xpath expr="//label[@for='password']" position="replace">
+			<label for="password">Contraseña</label>
+		</xpath>
+		<xpath expr="//label[@for='confirm_password']" position="replace">
+			<label for="confirm_password">Confirmar Contraseña</label>
+		</xpath>
+	</template>
+
+	<template id="auth_login" inherit_id="auth_signup.login" name="Login Inherit">
+		<xpath expr="//div[@class='justify-content-between mt-2 d-flex small']" position="replace">
+			<div class="justify-content-between mt-2 d-flex small">
+				<a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}">¿No tienes una cuenta?</a>
+				<a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}">Restablecer la contraseña</a>
+			</div>
+		</xpath>
+	</template>
+
+	<template id="login" inherit_id="web.login" name="Login Inherit">
+   		<xpath expr="//label[@for='db']" position="replace" />
+		<xpath expr="//label[@for='login']" position="replace" />
+		<xpath expr="//label[@for='password']" position="replace" />
+		<xpath expr="//button[@class='btn btn-primary btn-block']" position="replace">
+			<button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+		</xpath>
+		
+		<xpath expr="//input[@name='login']" position="attributes">
+			<attribute name="placeholder">Usuario ...</attribute>
+			<attribute name="autocomplete">off</attribute>
+			<attribute name="autocorrect">off</attribute>
+		</xpath>
+		
+		<xpath expr="//input[@name='password']" position="attributes">
+			<attribute name="placeholder">Contraseña ...</attribute>
+		</xpath>
+	</template>
+
+	<template id="reset_password"  inherit_id="auth_signup.reset_password"  name="Reset Password">
+		<xpath expr="//label[@for='login']" position="replace" >
+			<label for="login" class="control-label">Resetear su Contraseña</label>
+		</xpath>
+		<xpath expr="//a[@class='btn btn-link float-right']" position="replace" >
+			<a href="/web/login" class="btn btn-link float-right" role="button">Atrás para iniciar sesión</a>
+		</xpath>
+		<xpath expr="//div[@class='clearfix oe_login_buttons']" position="replace" >
+			<div class="clearfix oe_login_buttons">
+				<div class="d-flex justify-content-between align-items-center small">
+					<button type="submit" class="btn btn-primary btn-sm">Confirmar</button>
+					<a t-if="not token" t-attf-href="/web/login?{{ keep_query() }}">Atrás para iniciar sesión</a>
+					<a t-if="invalid_token" href="/web/login">Atrás para iniciar sesión</a>
+				</div>
+				<div class="o_login_auth"/>
+			</div>
+		</xpath>
+		<xpath expr="//input[@name='login']" position="attributes">
+			<attribute name="placeholder">Correo Electronico o Usuario</attribute>
+			<attribute name="class">login-input</attribute>
+		</xpath>
+    </template>
+
+
+</odoo>

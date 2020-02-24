@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2018 Modoolar <info@modoolar.com>
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+-->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form.password_security</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="auth_password_policy.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- We hide Odoo's minlength sections so it does not create confusion -->
+            <xpath expr="//label[@for='minlength']/../.." position="attributes">
+                <attribute name="style">display: none</attribute>
+            </xpath>
+
+            <!-- Add our password policy fields -->
+            <xpath expr="//div[@id='access_rights']" position="before">
+                <div class="col-12 col-lg-6 o_setting_box" title="Password Policy">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label string="Política de contraseñas" for="password_expiration"/>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <span>La contraseña caduca en <field name="password_expiration" class="oe_inline"/> días.</span>
+                            </div>
+                            <div class="mt16">
+                                <span>El usuario puede cambiar la contraseña en <field name="password_minimum" class="oe_inline"/> horas de nuevo.</span>
+                            </div>
+                            <div class="mt16">
+                                <span>No permitir la reutilización de <field name="password_history" class="oe_inline"/> contraseñas anteriores.</span>
+                                <div class="text-muted">
+                                    Use un número negativo para infinito, o 0 para deshabilitar
+                                </div>
+                            </div>
+                             <div class="mt16">
+                                <span>Número mínimo de caracteres <field name="password_length" class="oe_inline"/></span>
+                            </div>
+                            <div class="mt16">
+                                <span>Número mínimo de caracteres en minúscula <field name="password_lower" class="oe_inline"/></span>
+                            </div>
+                            <div class="mt16">
+                                <span>Número mínimo de caracteres en mayúscula <field name="password_upper" class="oe_inline"/></span>
+                            </div>
+                            <div class="mt16">
+                                <span>Número mínimo de caracteres numéricos <field name="password_numeric" class="oe_inline"/></span>
+                            </div>
+                            <div class="mt16">
+                                <span>Número mínimo de caracteres especiales <field name="password_special" class="oe_inline"/></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

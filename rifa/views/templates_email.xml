@@ -2,9 +2,9 @@
 <record id="message_reservado" model="mail.template">
         <field name="name">Mensaje de Reserva de Rifa</field>
         <field name="model_id" ref="model_rifa_rifa"></field>
-        <field name="email_from"><![CDATA[Juazisco <juazisco@gmail.com>]]></field>
+        <field name="email_from"><![CDATA[Gran RIFA <juazisco@gmail.com>]]></field>
         <field name="email_to">${object.email|safe}</field>
-        <field name="subject">Su Ticket de RIFA Nº ${object.ticket_number or object.id} ha sido reservado</field>
+        <field name="subject">Su Ticket ${object.ticket_number or object.id} ha sido reservado</field>
         <field name="auto_delete" eval="False"/>
         <field name="built_in" eval="True"/>
         <field name="body_html"><![CDATA[            
@@ -399,9 +399,9 @@
     <record id="message_pagado" model="mail.template">
         <field name="name">Mensaje de Pago de Rifa</field>
         <field name="model_id" ref="model_rifa_rifa"></field>
-        <field name="email_from"><![CDATA[Juazisco <juazisco@gmail.com>]]></field>
+        <field name="email_from"><![CDATA[Gran RIFA <juazisco@gmail.com>]]></field>
         <field name="email_to">${object.email|safe}</field>
-        <field name="subject">Su Ticket de RIFA Nº ${object.ticket_number or object.id} ha sido pagado</field>
+        <field name="subject">Su Ticket ${object.ticket_number or object.id} ha sido pagado</field>
         <field name="auto_delete" eval="False"/>
         <field name="built_in" eval="True"/>
         <field name="body_html"><![CDATA[

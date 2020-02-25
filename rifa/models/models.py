@@ -30,7 +30,6 @@ class rifa(models.Model):
     _description = 'rifa.rifa'
     _rec_name = 'ticket_number'
 
-
     ticket_number = fields.Char(string='Numero', readonly=True)
     description = fields.Text(default=DESCRIPCION_RIFA)
     state = fields.Selection(SELECTION_STATE_LOT,required=True, default='generado')
@@ -39,7 +38,7 @@ class rifa(models.Model):
     telephone = fields.Char()
     address = fields.Char()
     winner = fields.Boolean()
-    cost = fields.Integer(default=20)
+    cost = fields.Integer(default=10)
 
     @api.model
     def create(self, vals):
@@ -52,7 +51,10 @@ class rifa(models.Model):
     @api.multi
     def button_reservado(self):
         for rec in self:
-            rec.write({'state': 'reservado'})
+            if rec.name:
+                rec.write({'state': 'reservado'})
+            else:
+                raise Warning('Debe registrar al menos los Nombres')
     
     @api.multi
     def button_pagado(self):

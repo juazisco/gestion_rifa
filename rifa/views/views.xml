@@ -56,8 +56,6 @@
         </group>
       </group>
     </sheet>
-    <div class="oe_chatter">
-    </div>  
   </form>
   </field>
 </record>
@@ -73,7 +71,7 @@
             <templates>
                 <t t-name="kanban-box">
                      <t t-if="record.state.raw_value == 'generado'">
-                        <div style="background: greenyellow" t-attf-class=" oe_kanban_card oe_kanban_global_click">
+                        <div style="background: #D8F6CE" t-attf-class=" oe_kanban_card oe_kanban_global_click">
                             
                             <div class="o_kanban_image">
                                 <img alt="Generado" src="/rifa/static/description/icon.png" class="o_kanban_image"/> 
@@ -97,7 +95,7 @@
                     </t>
                     
                     <t t-if="record.state.raw_value == 'reservado'">
-                        <div style="background: yellow" t-attf-class=" oe_kanban_card oe_kanban_global_click">
+                        <div style="background: lemonchiffon" t-attf-class=" oe_kanban_card oe_kanban_global_click">
                           <div class="o_kanban_image">
                                 <img alt="Reservado" src="/rifa/static/description/icon.png" class="o_kanban_image"/> 
                             </div>
@@ -120,7 +118,7 @@
                     </t>
                     
                     <t t-if="record.state.raw_value == 'pagado'">
-                        <div style="background: skyblue" t-attf-class=" oe_kanban_card oe_kanban_global_click">
+                        <div style="background: #A9E2F3" t-attf-class=" oe_kanban_card oe_kanban_global_click">
                        <div class="o_kanban_image">
                                 <img alt="Pagado" src="/rifa/static/description/icon.png" class="o_kanban_image"/> 
                             </div>
@@ -179,14 +177,7 @@
 
     <!-- Top menu item -->
 
-    <menuitem name="Gestor de Rifas" id="rifa.menu_root"  groups="rifa_group,rifa_manager_group" web_icon="rifa,static/description/icon.png"/>
-   <!-- menu categories -->
-
-    <menuitem name="Opciones" id="rifa.menu_1" parent="rifa.menu_root"/>
-
-    <!-- actions -->
-
-    <menuitem name="Sortear" id="rifa.menu_1_list" parent="rifa.menu_1"
-              action="rifa.action_window"/>
+    <menuitem name="Gestor de Rifas" id="rifa.menu_root"  groups="rifa_group,rifa_manager_group" web_icon="rifa,static/description/icon.png" action="rifa.action_window" />
+ 
   </data>
 </odoo>

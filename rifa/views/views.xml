@@ -279,8 +279,9 @@
 
     <!-- Top menu item -->
 
-    <menuitem name="Gestor de Rifas" id="rifa.menu_root"  groups="rifa_group,rifa_manager_group" web_icon="rifa,static/description/icon.png" action="rifa.action_window" />
-    <menuitem name="Sortear" id="rifa.menu_sorteo" parent="rifa.menu_root" groups="rifa_manager_group" action="rifa.action_sorteo" />
+    <menuitem name="Gestor de Rifas" id="rifa.menu_root"  groups="rifa_group,rifa_manager_group" web_icon="rifa,static/description/icon_rifa.png" action="rifa.action_window" />
+    <menuitem name="Sorteo de Rifas" id="rifa.menu_sorteo"  groups="rifa_group,rifa_manager_group" web_icon="rifa,static/description/icon_sorteo.png" action="rifa.action_sorteo" />
+    
 
   </data>
 </odoo>

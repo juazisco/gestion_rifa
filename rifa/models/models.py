@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import Warning
+import random
 
 SELECTION_STATE_LOT = [
     ('generado', 'En Venta'),
@@ -84,3 +85,47 @@ class rifa(models.Model):
 
                 #Remove the message from the chatter since this would bloat the communication history by a lot
                 #send_mail.mail_message_id.res_id = 0
+
+class sorteo(models.Model):
+    _name = 'rifa.sorteo'
+    _description = 'rifa.sorteo'
+    _rec_name = 'nro_premio'
+
+    nro_premio = fields.Char(string='Nº Premio')
+    description = fields.Text()
+    state = fields.Selection([('no_sorteado', 'No Sorteado'),('sorteado', 'Sorteado')],required=True, default='no_sorteado')
+    nro_participantes  = fields.Integer()
+    ticket_winner = fields.Many2one('rifa.rifa', string="Ganador")
+    ticket_winner_name = fields.Char(related='ticket_winner.name')
+    ticket_winner_number = fields.Char(related='ticket_winner.ticket_number',default='')
+    ticket_winner_email = fields.Char(related='ticket_winner.email')
+    ticket_winner_telephone = fields.Char(related='ticket_winner.telephone')
+
+    @api.multi
+    def button_liberar_sorteo(self):
+        for rec in self:
+            if rec.ticket_winner:
+                #rifa_sorteada = self.env['rifa.rifa'].search([('id','=',rec.ticket_winner)])
+                rec.ticket_winner.write({
+                    'winner': False
+                })
+                rec.write({'state': 'no_sorteado','ticket_winner':None})
+
+            else:
+                raise Warning('No se pudo liberar el Premio')
+    
+    @api.multi
+    def rifa_sortear(self):
+        list_pagados = self.env['rifa.rifa'].search([('state','=','pagado'),('winner','!=',True)])
+        try:        
+            nro_participantes = len(list_pagados)
+            winner_ticket = random.choice(list_pagados)
+            self.update({'ticket_winner':winner_ticket})
+            self.write({'state': 'sorteado','nro_participantes':nro_participantes})
+            winner_ticket.write({
+                'winner': True
+            })
+        except:
+            raise Warning('No se pudo realizar el Sorteo')
+  
+  
